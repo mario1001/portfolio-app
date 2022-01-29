@@ -1,5 +1,8 @@
 import React from 'react';
+import logo from 'logo.svg';
 import './HeaderComponent.css';
+
+import { Link } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -14,7 +17,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Home', 'Projects', 'Blog', 'About'];
+const pages = ['projects', 'blog', 'about'];
 const settings = ['Profile', 'Logout'];
 
 const HeaderComponent = () => {
@@ -38,7 +41,7 @@ const HeaderComponent = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl" className="Header-background">
         <Toolbar disableGutters>
           <Typography
@@ -46,9 +49,9 @@ const HeaderComponent = () => {
             noWrap
             component="div"
             sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
-
           >
-            MILTONDEVS
+            <img src={logo} className="App-logo" alt="logo" />
+            <Link to="/home" style={{ textDecoration: 'none', color: 'inherit' }}>MILTONDEVS</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -81,7 +84,7 @@ const HeaderComponent = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} onClick={handleCloseNavMenu} component={Link} to={`/${page}`}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -92,7 +95,6 @@ const HeaderComponent = () => {
             noWrap
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-
           >
             MILTONDEVS
           </Typography>
@@ -102,6 +104,7 @@ const HeaderComponent = () => {
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
+                component={Link} to={`/${page}`}
               >
                 {page}
               </Button>
@@ -139,7 +142,7 @@ const HeaderComponent = () => {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </AppBar >
   );
 }
 
